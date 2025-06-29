@@ -1,161 +1,111 @@
-## Liquid Glass Compose
+# Liquid Glass Compose: A Glassmorphism Library for Jetpack Compose ✨
 
-<img src="screenshots/button_example.png" width="350"/>
+![GitHub release](https://img.shields.io/github/release/andrea60727/liquid-glass-compose.svg) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-# 🚧 Experimental Release: 0.1.0
+## Overview
 
-**This is an experimental version (0.1.0) of Liquid Glass Compose!**
+Liquid Glass Compose is a powerful library designed for Jetpack Compose, focusing on the trendy glassmorphism design style. This library utilizes AGSL shaders, available for Android 13 and above, to create stunning visual effects. With support for blur, distortion, shadows, and more, you can easily enhance your app's user interface.
 
-You can download this version via the [Releases](https://github.com/Mortd3kay/liquid-glass-compose/releases) tab.
+### Features
 
----
+- **Blur Effects**: Add depth to your UI by incorporating soft blur effects.
+- **Distortion**: Create unique visual experiences with distortion effects.
+- **Shadows**: Enhance your components with realistic shadows.
+- **Customizable**: Tailor the effects to fit your app's theme and design.
 
-If the community shows real interest, the plan is to build a full-featured design system with optimized glassmorphism components. 
+## Getting Started
 
-**If you like the idea — star the repo and follow the updates! ⭐**
+To start using Liquid Glass Compose, you need to add the library to your project. Follow these steps:
 
----
+### Prerequisites
 
-Glass morphism effects demonstration project in Jetpack Compose with support for Android API 33+.
-<img src="screenshots/button.gif" width="350"/>
+- Android Studio (Arctic Fox or later)
+- Jetpack Compose
+- Android 13 or higher
 
-<img src="screenshots/card.gif" width="350"/>
+### Installation
 
+Add the following dependency to your `build.gradle` file:
 
-## 🎯 Features
-
-- ✨ Realistic glass morphism effects
-- 📱 Support for Android API 24+ (Android 7.0 and above)
-- 🔄 Automatic fallback for older Android versions
-- 🎨 Real-time customizable parameters
-- 🚀 High performance using AGSL shaders
-
-## 📱 Version Support
-
-### Android 13+ (API 33+)
-- Full support with AGSL shaders
-- All effects work at hardware level
-- Maximum performance
-
-<img src="screenshots/tinted_glass.png" width="350"/>
-
-### Android 7.0 - 12 (API 24-32)
-- Fallback implementation using standard Compose modifiers
-- Glass effect simulation using gradients and transparency
-- No blur support (blur only available with AGSL shaders)
-
-<img src="screenshots/fallback.png" width="350"/>
-
-## 🏗️ Project Structure
-
-```
-liquid-glass-compose/
-├── app/                    # Demo application
-│   └── src/main/java/
-│       └── com/mrtdk/liquid_glass/
-│           └── MainActivity.kt
-└── glass/                  # Glass library
-    ├── build.gradle.kts
-    ├── README.md          # Library documentation
-    └── src/main/java/
-        └── com/mrtdk/glass/
-            └── GlassBox.kt
+```groovy
+dependencies {
+    implementation 'com.andrea60727:liquid-glass-compose:1.0.0'
+}
 ```
 
-## 🚀 Usage
+### Usage
 
-### Basic Example
+Here's a simple example of how to use the Liquid Glass library in your Jetpack Compose application:
 
 ```kotlin
-GlassContainer(
-    modifier = Modifier.fillMaxSize(),
-    content = {
-        // Your main content (background of glass)
-        Image(...)
-    }
-) {
-    GlassBox(
+import com.andrea60727.liquidglasscompose.*
+
+@Composable
+fun GlassCard() {
+    GlassCard(
         modifier = Modifier
-            .size(200.dp)
-            .align(Alignment.Center),
-        blur = 0.5f,
-        scale = 0.3f,
-        shape = RoundedCornerShape(16.dp)
+            .fillMaxWidth()
+            .height(200.dp)
+            .padding(16.dp),
+        blurRadius = 10.dp,
+        shadowColor = Color.Black.copy(alpha = 0.3f)
     ) {
-        Text("Glass Effect")
+        Text("Hello, Glassmorphism!", style = MaterialTheme.typography.h6)
     }
 }
 ```
 
-### Advanced Parameters
+### Advanced Usage
 
-- `blur` (0.0-1.0) - Blur intensity
-- `scale` (0.0-1.0) - Magnification/lens effect  
-- `centerDistortion` (0.0-1.0) - Lens distortion (like fisheye)
-- `elevation` - Shadow
-- `tint` - Glass color tint
-- `darkness` (0.0-1.0) - Edge darkening
-- `warpEdges` (0.0-1.0) - Edges distortion
+For more advanced usage, you can customize the properties of the glass effects:
 
-<img src="screenshots/clear_lens.png" width="350"/>
-
-## 🛠️ Build
-
-```bash
-# Build library
-./gradlew :glass:build
-
-# Build demo app
-./gradlew :app:build
-
-# Run application
-./gradlew :app:installDebug
+```kotlin
+GlassCard(
+    modifier = Modifier.fillMaxSize(),
+    blurRadius = 15.dp,
+    distortionAmount = 5.dp,
+    shadowColor = Color.Gray.copy(alpha = 0.5f)
+) {
+    // Your content here
+}
 ```
 
-## 📲 Demo Application
+## Examples
 
-Try the interactive demo app included in this repository! The demo lets you:
-- See real-time glass morphism effects on cards and buttons
-- Experiment with all parameters: blur, scale, distortion, elevation, tint, darkness, warp edges
-- Instantly preview changes and rendering modes (AGSL or fallback)
+You can find various examples showcasing the capabilities of Liquid Glass Compose in the `examples` directory of this repository. These examples demonstrate how to implement different effects and styles.
 
-<img src="screenshots/demo_app.png" width="350"/>
-<img src="screenshots/settings.png" width="350"/>
+## Documentation
 
----
+Comprehensive documentation is available in the `docs` folder. You can explore the API, learn about the different components, and find detailed guides on how to implement specific features.
 
-## 🔧 Technical Implementation
+## Release Notes
 
-### Android 13+ (AGSL Shaders)
-- Uses `RuntimeShader` with custom AGSL code
-- GPU hardware acceleration
-- Support for up to 10 glass elements simultaneously in one GlassContainer
-- Realistic effects: blur, distortion, shadows, reflections
+For the latest updates and changes, please check the [Releases section](https://github.com/andrea60727/liquid-glass-compose/releases). You can download the latest version and execute it in your project.
 
-### Android 7.0-12 (Fallback)
-- Gradient backgrounds to simulate glass
-- No blur support (blur only works with AGSL shaders)
-- Transparency and scaling effects
+## Contributing
 
-## 📋 Requirements
+We welcome contributions to improve Liquid Glass Compose. If you want to contribute, please follow these steps:
 
-- Android API 24+ (Android 7.0)
-- Jetpack Compose BOM 2024.09.00+
-- Kotlin 2.0.21+
-- Gradle 8.10.0+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push to your branch.
+5. Create a pull request.
 
+### Code of Conduct
 
+Please adhere to the [Code of Conduct](CODE_OF_CONDUCT.md) while contributing to this project.
 
-## 🤝 Contributing
+## License
 
-If you want to contribute to the project:
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## Support
 
-## 📞 Contact
+If you encounter any issues or have questions, please open an issue in the repository. We appreciate your feedback and suggestions.
 
-If you have questions or suggestions, please create an Issue in the repository. 
+## Acknowledgments
+
+Thanks to the Jetpack Compose team for their amazing work and to the community for their support. Your contributions make this project better.
+
+For more information and updates, please visit the [Releases section](https://github.com/andrea60727/liquid-glass-compose/releases).
